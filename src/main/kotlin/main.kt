@@ -1,34 +1,34 @@
-import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.window.WindowDraggableArea
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
-@Composable
-@Preview
-fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
-
-    MaterialTheme {
-        Button(
-            onClick = { text = "Hello, Desktop!" },
-            modifier = Modifier.testTag("button")
-        ) {
-            Text(text)
-        }
-    }
-}
-
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
-        App()
+    Window(
+        resizable = false,
+        undecorated = true,
+        onCloseRequest = ::exitApplication
+    ) {
+        WindowDraggableArea(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp)
+                .background(Color.Yellow)
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Close,
+                contentDescription = null,
+                modifier = Modifier.clickable(onClick = ::exitApplication)
+            )
+        }
     }
 }
